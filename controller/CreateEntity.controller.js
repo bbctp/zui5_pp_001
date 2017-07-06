@@ -6,11 +6,10 @@ sap.ui.define(["com/grifols/pp/wf/materials/controller/BaseController", "sap/ui/
 	return BaseController.extend("com.grifols.pp.wf.materials.controller.CreateEntity", {
 
 		_oBinding: {},
-<<<<<<< HEAD
+
 /*Test sobreescibir línea*/
-=======
-/*Manuel Feo! :-P  ahahah */ 
->>>>>>> 5dfed87534aefc7faa32979354f2d769636d3c1a
+/*omg*/
+
 		/* =========================================================== */
 		/* lifecycle methods                                           */
 		/* =========================================================== */
