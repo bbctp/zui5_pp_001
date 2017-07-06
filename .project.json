@@ -1,7 +1,7 @@
 {
   "mockpreview": {
-    "mockUri": "",
-    "metadataFilePath": "",
+    "mockUri": "/sap/opu/odata/sap/ZOD_PP_0001_SRV/",
+    "metadataFilePath": "localService/metadata.xml",
     "loadJSONFiles": false,
     "loadCustomRequests": false,
     "mockRequestsFilePath": ""
@@ -18,5 +18,12 @@
     "buildRequired": true,
     "targetFolder": "dist",
     "lastBuildDateTime": "Thu, 06 Jul 2017 12:47:29 GMT"
+  },
+  "translation": {
+    "translationDomain": "",
+    "supportedLanguages": "",
+    "defaultLanguage": "",
+    "defaultI18NPropertyFile": "",
+    "resourceModelName": ""
   }
 }
