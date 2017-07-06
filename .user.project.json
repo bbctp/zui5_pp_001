@@ -1,0 +1,50 @@
+{
+  "run": [
+    {
+      "filePath": "/Component.js",
+      "previewMode": 1,
+      "dataMode": 1,
+      "workspace": "withoutWorkspace",
+      "ui5ActiveVersion": null,
+      "ui5VerSource": null,
+      "isDefaultVersion": 0,
+      "urlParameters": [
+        {
+          "paramName": "",
+          "paramValue": ""
+        }
+      ],
+      "hashParameter": "",
+      "backendSystem": [
+        {
+          "source": "SGW200",
+          "destinations": "SGW200"
+        }
+      ],
+      "_metadata": {
+        "id": 7472222,
+        "runnerId": "fiorirunner",
+        "displayName": "Run Component.js",
+        "lastRunTimeStamp": 1499333907129
+      }
+    },
+    {
+      "filePath": "/Component-preload.js",
+      "previewMode": 1,
+      "dataMode": 1,
+      "workspace": "withoutWorkspace",
+      "ui5ActiveVersion": null,
+      "ui5VerSource": null,
+      "isDefaultVersion": 0,
+      "urlParameters": [],
+      "hashParameter": "",
+      "backendSystem": [],
+      "_metadata": {
+        "id": 7238895,
+        "runnerId": "fiorirunner",
+        "displayName": "Run Component-preload.js",
+        "lastRunTimeStamp": 1499164886364
+      }
+    }
+  ]
+}

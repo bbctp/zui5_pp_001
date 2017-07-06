@@ -1,0 +1,237 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form" xmlns:footerbar="sap.ushell.ui.footerbar" xmlns:l="sap.ui.layout" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic" xmlns:smart="sap.ui.comp.smartfield" xmlns="sap.m" controllerName="com.grifols.pp.wf.materials.controller.CreateEntity">
+	<semantic:DetailPage id="page" navButtonPress="onNavBack" title="{viewModel>/viewTitle}" busy="{viewModel>/busy}">
+		<semantic:content>
+			
+			<f:SimpleForm editable="true" layout="ResponsiveGridLayout" id="__form0" labelSpanM="5" labelSpanL="5">
+				<f:content>
+					<core:Title text="{i18n>basicData}" id="__title0"/>
+					<Label text="{i18n>requester}" required="true"/>
+					<Input name="Ernam" id="Ernam_id2" valueLiveUpdate="true" liveChange="_validateSaveEnablement" visible="true" value="{ path: 'Peticion>/Ernam', type: 'sap.ui.model.odata.type.String' , constraints:{ maxLength:12 } }" editable="false"/>
+					<Label text="{i18n>description}" required="true"/>
+					<Input name="Maktx" id="Maktx_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement" visible="true" value="{ path: 'Peticion>/Maktx', type: 'sap.ui.model.odata.type.String' , constraints:{ maxLength:40 } }"/>
+					
+					<Label text="{i18n>plant}" required="true"/>
+					
+					<Select items="{Plants>/}" selectedKey="{ path: 'Peticion>/Werks', type: 'sap.ui.model.odata.type.String' }" id="Werks_id" change="_validateSaveEnablement">
+					    <items>
+					    	<core:ListItem text="{Plants>Werks} {Plants>Name1}" key="{Plants>Werks}" id="Werks_item"/>
+					    </items>
+					</Select>
+					
+					
+					<Label text="{i18n>materialSubstitution}" required="true" id="ZzsubsMat_box_id_lbl"/>
+					<Select selectedKey="{ path: 'Peticion>/ZzsubsMat', type: 'sap.ui.model.odata.type.String' , constraints:{ maxLength:1 } }" id="ZzsubsMat_box_id" change="onMaterialSubstitution">
+					    <items>
+					    	<core:ListItem text="" key="" id="__item16_b2"/>
+							<core:ListItem text="{i18n>no}" key="N" id="__item16_b"/>
+							<core:ListItem text="{i18n>yes}" key="Y" id="__item17_b"/>
+					     </items>
+					</Select>
+					<Label id="ZzmatnrSubs_id_lbl" text="{i18n>which}" required="false"/>
+					<Input name="ZzmatnrSubs" id="ZzmatnrSubs_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement" visible="true" value="{ path: 'Peticion>/ZzmatnrSubs', type: 'sap.ui.model.odata.type.String' , constraints:{ maxLength:18 } }"/>
+					<Label text="{i18n>businessLine}" required="true"/>
+					<Select items="{LineOfBusiness>/}" selectedKey="{ path: 'Peticion>/Zzlnegocio', type: 'sap.ui.model.odata.type.String' , constraints:{ maxLength:5 } }" id="Zzlnegocio_box_id" change="_validateSaveEnablement">
+					    <items>
+					    	<core:ListItem text="{LineOfBusiness>ZNeg_Text} - {LineOfBusiness>Werks}" key="{LineOfBusiness>ZLine_Neg}" id="LineBusiness_item"/>
+			
+					      </items>
+					</Select>
+					<Label text="{i18n>division}" required="true"/>
+					<Select items="{Division>/}" selectedKey="{ path: 'Peticion>/Zzdivision', type: 'sap.ui.model.odata.type.String' , constraints:{ maxLength:18 } }" id="Zzdivision_box_id" change="onDivision">
+					    <items>
+							<core:ListItem text="{Division>Vtext}" key="{Division>Prodh}" id="division_item"/>
+					        </items>
+					</Select>
+
+					<Label text="{i18n>hierarchyIndicate}" width="100%" id="Other_division_id_lbl"/>
+					<Input width="100%" id="Other_division_id" value="{Peticion>/ZzdivOthers}"/>
+				</f:content>
+			</f:SimpleForm>
+			<f:SimpleForm editable="true" layout="ResponsiveGridLayout" id="__form1" labelSpanM="5" labelSpanL="5">
+				<f:content>
+					<core:Title text="{i18n>uom}" id="__title1"/>
+					<Label text="{i18n>baseUOM}" required="true"/>
+					
+					<Select items="{UoMM>/}" selectedKey="{ path: 'Peticion>/Meins', type: 'sap.ui.model.odata.type.String' , constraints:{ maxLength:3 } }" id="Meins_id" change="_validateSaveEnablement">
+					    <items>
+					    	<core:ListItem text="{UoMM>Msehl}" key="{UoMM>Msehi}" id="Meins_item"/>
+					    </items>
+					</Select>
+					
+					<Label text="{i18n>alternativeUOM}"/>
+					
+					<Select items="{UoMM>/}" selectedKey="{ path: 'Peticion>/Meinh', type: 'sap.ui.model.odata.type.String' , constraints:{ maxLength:3 } }" id="Meinh_id" change="_validateSaveEnablement">
+					    <items>
+					    	<core:ListItem text="{UoMM>Msehl}" key="{UoMM>Msehi}" id="Meinh_item"/>
+					    </items>
+					</Select>
+					
+					<Label text="{i18n>conversionAUOM}"/>
+					<Input name="Umren" id="Umren_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement" visible="true" value="{ path: 'Peticion>/Umren', type: 'sap.ui.model.odata.type.Decimal' , constraints:{ precision:5, scale:0 } }"/>
+				</f:content>
+			</f:SimpleForm>
+			<f:SimpleForm editable="true" layout="ResponsiveGridLayout" id="__form2" labelSpanM="5" labelSpanL="5">
+				<f:content>
+					<core:Title text="{i18n>materialType}" id="__title2"/>
+					<Label id="ZzprodAcab_box_id_lbl" text="{i18n>isFinishedProduct}" required="true"/>
+					<Select selectedKey="{ path: 'Peticion>/ZzprodAcab', type: 'sap.ui.model.odata.type.String' , constraints:{ maxLength:1 } }" id="ZzprodAcab_box_id" change="onFinishedProduct">
+					    <items>
+					        <core:ListItem text="" key="" id="__item16"/>
+					        <core:ListItem text="{i18n>no}" key="N" id="__item17"/>
+					        <core:ListItem text="{i18n>yes}" key="Y" id="__item31"/>
+					     </items>
+					</Select>
+					<Label id="Zzestructura_box_id_lbl" text="{i18n>doesHaveStructure}" required="false"/>
+					<Select selectedKey="{ path: 'Peticion>/Zzestructura', type: 'sap.ui.model.odata.type.String' , constraints:{ maxLength:1 } }" id="Zzestructura_box_id" change="onHasStructure">
+					    <items>
+					    	<core:ListItem text="" key="" id="__item6_b"/>
+							<core:ListItem text="{i18n>no}" key="N" id="__item6"/>
+							<core:ListItem text="{i18n>yes}" key="Y" id="__item7"/>
+					     </items>
+					</Select>
+					<Label id="ZztipoMat_box_id_lbl" text="{i18n>materialType}" required="false"/>
+					<Select selectedKey="{ path: 'Peticion>/ZztipoMat', type: 'sap.ui.model.odata.type.String' , constraints:{ maxLength:4 } }" id="ZztipoMat_box_id" change="onMaterialType">
+					    <items>
+					    	<core:ListItem text="" key="" id="__item27_b"/>
+					    	<core:ListItem text="{i18n>controlStock}" key="ROH" id="__item27"/>
+							<core:ListItem text="{i18n>printedMaterial}" key="LEER" id="__item28"/>
+							<core:ListItem text="{i18n>auxiliaryMaterial}" key="HIBE" id="__item29"/>
+							<core:ListItem text="{i18n>spentMaterial}" key="NLAG" id="__item30"/>
+					    </items>
+					</Select>
+					<Label id="ZzestanEspecDg_box_id_lbl" text="{i18n>isStandardOrSpecific}" required="false"/>
+					<Select selectedKey="{ path: 'Peticion>/ZzestanEspecDg', type: 'sap.ui.model.odata.type.String' , constraints:{ maxLength:1 } }" id="ZzestanEspecDg_box_id" change="onStandardOrSpecific">
+					    <items>
+					    	<core:ListItem text="" key="" id="__item8_b"/>
+							<core:ListItem text="{i18n>standard}" key="S" id="__item8"/>
+							<core:ListItem text="{i18n>specific}" key="E" id="__item9"/>
+					    </items>
+					</Select>
+					<Label id="ZzfabInt_box_id_lbl" text="{i18n>isInternalManufactured}" required="false"/>
+					<Select selectedKey="{ path: 'Peticion>/ZzfabInt', type: 'sap.ui.model.odata.type.String' , constraints:{ maxLength:1 } }" id="ZzfabInt_box_id" change="onInternallyManufactured">
+					    <items>
+					    	<core:ListItem text="" key="" id="__item2_b"/>
+							<core:ListItem text="{i18n>manufacture}" key="M" id="__item2"/>
+							<core:ListItem text="{i18n>purchase}" key="P" id="__item3"/>
+					     </items>
+					</Select>
+					<Label id="ZzdgLegal_box_id_lbl" text="{i18n>isDgManufacturer}" required="false"/>
+					<Select selectedKey="{ path: 'Peticion>/ZzdgLegal', type: 'sap.ui.model.odata.type.String' , constraints:{ maxLength:1 } }" id="ZzdgLegal_box_id" change="onOthersComboBox">
+					    <items>
+					    	<core:ListItem text="" key="" id="__item4_b"/>
+					      	<core:ListItem text="{i18n>no}" key="N" id="__item4"/>
+							<core:ListItem text="{i18n>yes}" key="Y" id="__item5"/>
+							</items>
+					</Select>
+					<Label id="ZzctrlCalidad_box_id_lbl" text="{i18n>doesHaveQualityControl}" required="false"/>
+					<Select selectedKey="{ path: 'Peticion>/ZzctrlCalidad', type: 'sap.ui.model.odata.type.String' , constraints:{ maxLength:1 } }" id="ZzctrlCalidad_box_id" change="onQualityControl">
+					    <items>
+					    	<core:ListItem text="" key="" id="__item10_b"/>
+					       <core:ListItem text="{i18n>no}" key="N" id="__item10"/>
+							<core:ListItem text="{i18n>yes}" key="Y" id="__item11"/>
+					    </items>
+					</Select>
+					<Label id="Zzbiologico_box_id_lbl" text="{i18n>isBiological}" required="false"/>
+					<Select selectedKey="{ path: 'Peticion>/Zzbiologico', type: 'sap.ui.model.odata.type.String' , constraints:{ maxLength:1 } }" id="Zzbiologico_box_id" change="onOthersComboBox">
+					    <items>
+					    	<core:ListItem text="" key="" id="__item12_b"/>
+							<core:ListItem text="{i18n>no}" key="N" id="__item12"/>
+							<core:ListItem text="{i18n>yes}" key="Y" id="__item13"/>
+					    </items>
+					</Select>
+					<Label id="Zzdisenyo_box_id_lbl" text="{i18n>onlyDesign}" required="false"/>
+					<Select selectedKey="{ path: 'Peticion>/Zzdisenyo', type: 'sap.ui.model.odata.type.String' , constraints:{ maxLength:1 } }" id="Zzdisenyo_box_id" change="onOthersComboBox">
+					    <items>
+					    	<core:ListItem text="" key="" id="__item14_b"/>
+					        <core:ListItem text="{i18n>no}" key="N" id="__item14"/>
+							<core:ListItem text="{i18n>yes}" key="Y" id="__item15"/>
+							</items>
+					</Select>
+				</f:content>
+			</f:SimpleForm>
+			<f:SimpleForm editable="true" layout="ResponsiveGridLayout" id="__form3" labelSpanM="5" labelSpanL="5">
+				<f:content>
+					<core:Title text="{i18n>additionalInformation}" id="__title3"/>
+					<Label text="{i18n>annualConsumption}" required="false"/>
+					<Input name="Zzconsumo" id="Zzconsumo_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement" visible="true" value="{ path: 'Peticion>/Zzconsumo', type: 'sap.ui.model.odata.type.Decimal' , constraints:{ precision:13 } }"/>
+					<Label text="{i18n>vendor}" required="false"/>
+					<Input name="Lifnr" id="Lifnr_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement" visible="true" value="{ path: 'Peticion>/Lifnr', type: 'sap.ui.model.odata.type.String' , constraints:{ maxLength:10 } }"/>
+					<Label text="{i18n>vendorCode}" required="false"/>
+					<Input name="Name1" id="Name1_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement" visible="true" value="{ path: 'Peticion>/Name1', type: 'sap.ui.model.odata.type.String' , constraints:{ maxLength:35 } }"/>
+					<Label text="{i18n>vendorInternalRef}" required="false"/>
+					<Input name="Idnlf" id="Idnlf_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement" visible="true" value="{ path: 'Peticion>/Idnlf', type: 'sap.ui.model.odata.type.String' , constraints:{ maxLength:35 } }"/>
+					<Label text="{i18n>netPrice}" required="false"/>
+					<Input name="Netpr" id="Netpr_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement" visible="true" value="{ path: 'Peticion>/Netpr', type: 'sap.ui.model.odata.type.Decimal' , constraints:{ precision:12 } }"/>
+					<Select items="{Curr>/}" selectedKey="{ path: 'Peticion>/Waers', type: 'sap.ui.model.odata.type.String' , constraints:{ maxLength:5 } }" id="Waersbox_id">
+					    <items>
+					    	<core:ListItem text="{Curr>Ltext}" key="{Curr>Waers}" id="Waers_item"/>
+					     </items>
+					</Select>
+					
+					<Label text="{i18n>deliveryTerm}" required="false"/>
+					<Input name="Eeind" id="Eeind_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement" visible="true" value="{ path: 'Peticion>/Eeind', type: 'sap.ui.model.odata.type.String' , constraints:{ maxLength:10 } }"/>
+					<Label text="{i18n>purchaseFromGroup}" required="false"/>
+					<Input name="ZzcompraGrupo" id="ZzcompraGrupo_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement" visible="true" value="{ path: 'Peticion>/ZzcompraGrupo', type: 'sap.ui.model.odata.type.String' , constraints:{ maxLength:1 } }"/>
+					<Label text="{i18n>companyCode}" required="false"/>
+					<Input name="ZzempresaCompra" id="ZzempresaCompra_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement" visible="true" value="{ path: 'Peticion>/ZzempresaCompra', type: 'sap.ui.model.odata.type.String' , constraints:{ maxLength:4 } }"/>
+					<Label text="{i18n>others}" required="false"/>
+					<Input name="Zzotros" id="Zzotros_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement" visible="true" value="{ path: 'Peticion>/Zzotros', type: 'sap.ui.model.odata.type.String' , constraints:{ maxLength:255 } }"/>
+				</f:content>
+			</f:SimpleForm>
+			<f:SimpleForm editable="true" layout="ResponsiveGridLayout" id="__form4" labelSpanM="5" labelSpanL="5">
+				<f:content>
+					<core:Title text="{i18n>descriptions}" id="__title4"/>
+					<Table id="textTable" width="75%" items="{Peticion>/goToText/}" noDataText="{i18n>detailLineItemTableNoDataText}" class="sapUiResponsiveMargin">
+						<headerToolbar>
+							<Toolbar id="lineItemsToolbar" design="Solid">
+								<ToolbarSpacer id="__spacer1"/>
+								<Button width="50px" id="addRow" icon="sap-icon://add" press="onAddRow" type="Transparent"/>
+								<content/>
+							</Toolbar>
+						</headerToolbar>
+						<columns>
+							<Column width="12%">
+								<Text text="{i18n>delete}"/>
+							</Column>
+							<Column width="25%">
+								<Text text="{i18n>language}"/>
+							</Column>
+							<Column minScreenWidth="Tablet" demandPopin="true" hAlign="Right">
+								<Text text="{i18n>text}"/>
+							</Column>
+						</columns>
+						<items>
+							<ColumnListItem>
+								<cells>
+									<Button width="50px" id="__button0" icon="sap-icon://delete" press="onDeleteRow"/>
+									
+									
+									<Select items="{Langs>/}" selectedKey="{Peticion>Spras}" id="Spras_box_id">
+										<items>
+											<core:ListItem text="{Langs>Sptxt}" key="{Langs>Sprsl}" id="Spras_item"/>
+										</items>
+									</Select>
+									<Input width="100%" id="__input0" value="{Peticion>Maktx}"/>
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+				</f:content>
+			</f:SimpleForm>
+		</semantic:content>
+		<semantic:saveAction>
+			<semantic:SaveAction id="save" enabled="{viewModel>/enableCreate}" press="onSave"/>
+		</semantic:saveAction>
+		<semantic:cancelAction>
+			<semantic:CancelAction id="cancel" press="onCancel"/>
+		</semantic:cancelAction>
+	<semantic:subHeader>
+	    <Bar id="__bar0" design="SubHeader">
+	        <contentRight>
+	        	    <Input width="20%" id="petition_id" placeholder="{i18n>petition2}" type="Number" submit="onCopyPetition" />
+					<Button text="{i18n>copyPetition}" width="200px" id="load_button" press="onCopyPetition" icon="sap-icon://copy" type="Emphasized"/>
+	        </contentRight>
+	    </Bar>
+	</semantic:subHeader>
+	</semantic:DetailPage>
+</mvc:View>

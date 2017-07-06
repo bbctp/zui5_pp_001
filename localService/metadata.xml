@@ -1,0 +1,83 @@
+<edmx:Edmx
+    xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx"
+    xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata"
+    xmlns:sap="http://www.sap.com/Protocols/SAPData" Version="1.0">
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema
+            xmlns="http://schemas.microsoft.com/ado/2008/09/edm" Namespace="ZOD_PP_0001_SRV" xml:lang="en" sap:schema-version="1">
+            <EntityType Name="Material" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Zzpeticion"/>
+                </Key>
+                <Property Name="Zzpeticion" Type="Edm.String" Nullable="false" MaxLength="20" sap:label="Material" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Ernam" Type="Edm.String" MaxLength="12" sap:label="Created by" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ZzpalRepre" Type="Edm.String" MaxLength="20" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Zzdesc" Type="Edm.String" MaxLength="20" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ZzcarTec" Type="Edm.String" MaxLength="20" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Zzproyecto" Type="Edm.String" MaxLength="20" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Maktx" Type="Edm.String" MaxLength="40" sap:label="Description" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ZzsubsMat" Type="Edm.String" MaxLength="1" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ZzmatnrSubs" Type="Edm.String" MaxLength="18" sap:label="Material" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Zzlnegocio" Type="Edm.String" MaxLength="5" sap:label="Business Line" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Zzdivision" Type="Edm.String" MaxLength="2" sap:label="Division" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Meins" Type="Edm.String" MaxLength="3" sap:label="Base Unit" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" sap:semantics="unit-of-measure"/>
+                <Property Name="Meinh" Type="Edm.String" MaxLength="3" sap:label="AlternativeUnit" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" sap:semantics="unit-of-measure"/>
+                <Property Name="Umren" Type="Edm.Decimal" Precision="5" Scale="0" sap:label="Denominator" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ZzprodAcab" Type="Edm.String" MaxLength="1" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ZzfabInt" Type="Edm.String" MaxLength="1" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ZzdgLegal" Type="Edm.String" MaxLength="1" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Zzestructura" Type="Edm.String" MaxLength="1" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ZzfabIntHalb" Type="Edm.String" MaxLength="1" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ZzestanEspecDg" Type="Edm.String" MaxLength="1" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ZzctrlCalidad" Type="Edm.String" MaxLength="1" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Zzbiologico" Type="Edm.String" MaxLength="1" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ZztipoMat" Type="Edm.String" MaxLength="4" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Zzdisenyo" Type="Edm.String" MaxLength="1" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Zzconsumo" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="Meins" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Lifnr" Type="Edm.String" MaxLength="10" sap:label="Vendor" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Name1" Type="Edm.String" MaxLength="35" sap:label="Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Idnlf" Type="Edm.String" MaxLength="35" sap:label="Vendor Mat. No." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Netpr" Type="Edm.Decimal" Precision="12" Scale="3" sap:unit="Waers" sap:label="Net Price" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Waers" Type="Edm.String" MaxLength="5" sap:label="Currency" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" sap:semantics="currency-code"/>
+                <Property Name="Eeind" Type="Edm.String" MaxLength="10" sap:label="Delivery Date" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ZzcompraGrupo" Type="Edm.String" MaxLength="1" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ZzempresaCompra" Type="Edm.String" MaxLength="4" sap:label="Company Code" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Zzotros" Type="Edm.String" MaxLength="255" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <NavigationProperty Name="goToText" Relationship="ZOD_PP_0001_SRV.MaterialToText" FromRole="FromRole_MaterialToText" ToRole="ToRole_MaterialToText"/>
+            </EntityType>
+            <EntityType Name="MaterialText" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Zzpeticion"/>
+                    <PropertyRef Name="Spras"/>
+                </Key>
+                <Property Name="Zzpeticion" Type="Edm.String" Nullable="false" MaxLength="20" sap:label="Material" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Spras" Type="Edm.String" Nullable="false" MaxLength="2" sap:label="Language" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Maktx" Type="Edm.String" MaxLength="40" sap:label="Description" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <Association Name="MaterialToText" sap:content-version="1">
+                <End Type="ZOD_PP_0001_SRV.Material" Multiplicity="*" Role="FromRole_MaterialToText"/>
+                <End Type="ZOD_PP_0001_SRV.MaterialText" Multiplicity="0..1" Role="ToRole_MaterialToText"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_MaterialToText">
+                        <PropertyRef Name="Zzpeticion"/>
+                    </Principal>
+                    <Dependent Role="ToRole_MaterialToText">
+                        <PropertyRef Name="Zzpeticion"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <EntityContainer Name="ZOD_PP_0001_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="MaterialTextSet" EntityType="ZOD_PP_0001_SRV.MaterialText" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="MaterialSet" EntityType="ZOD_PP_0001_SRV.Material" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <AssociationSet Name="MaterialToTextSet" Association="ZOD_PP_0001_SRV.MaterialToText" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="MaterialSet" Role="FromRole_MaterialToText"/>
+                    <End EntitySet="MaterialTextSet" Role="ToRole_MaterialToText"/>
+                </AssociationSet>
+            </EntityContainer>
+            <atom:link
+                xmlns:atom="http://www.w3.org/2005/Atom" rel="self" href="./sap/ZOD_PP_0001_SRV/$metadata"/>
+                <atom:link
+                    xmlns:atom="http://www.w3.org/2005/Atom" rel="latest-version" href="./sap/ZOD_PP_0001_SRV/$metadata"/>
+                </Schema>
+            </edmx:DataServices>
+        </edmx:Edmx>
