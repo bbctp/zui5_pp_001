@@ -1,16 +1,34 @@
 {
     "resources": [
         {
-            "name": "view/CreateEntity.view.xml"
+            "name": "i18n/i18n.properties",
+            "raw": "i18n/i18n.properties"
         },
         {
-            "name": "view/App.view.xml"
+            "name": "i18n/i18n_es.properties",
+            "raw": "i18n/i18n.properties"
         },
         {
-            "name": "view/ViewSettingsDialog.fragment.xml"
+            "name": "resources.json",
+            "merged": true
         },
         {
-            "name": "view/NotFound.view.xml"
+            "name": "model/models.js"
+        },
+        {
+            "name": "model/formatter.js"
+        },
+        {
+            "name": "model/GroupSortState.js"
+        },
+        {
+            "name": "neo-app.json"
+        },
+        {
+            "name": "localService/metadata.xml"
+        },
+        {
+            "name": "localService/mockserver.js"
         },
         {
             "name": "view/DetailNoObjectsAvailable.view.xml"
@@ -19,25 +37,44 @@
             "name": "view/Master.view.xml"
         },
         {
-            "name": "view/Detail.view.xml"
+            "name": "view/App.view.xml"
         },
         {
             "name": "view/DetailObjectNotFound.view.xml"
+        },
+        {
+            "name": "view/ViewSettingsDialog.fragment.xml"
+        },
+        {
+            "name": "view/NotFound.view.xml"
+        },
+        {
+            "name": "view/Detail.view.xml"
+        },
+        {
+            "name": "view/CreateEntity.view.xml"
+        },
+        {
+            "name": "manifest.json"
+        },
+        {
+            "name": "README.md"
         },
         {
             "name": "Component-preload.js",
             "merged": true
         },
         {
-            "name": "i18n/i18n_es.properties",
-            "raw": "i18n/i18n.properties"
-        },
-        {
-            "name": "i18n/i18n.properties",
-            "raw": "i18n/i18n.properties"
+            "name": "Component.js"
         },
         {
             "name": "controller/Master.controller.js"
+        },
+        {
+            "name": "controller/Detail.controller.js"
+        },
+        {
+            "name": "controller/ErrorHandler.js"
         },
         {
             "name": "controller/ListSelector.js"
@@ -49,50 +86,13 @@
             "name": "controller/App.controller.js"
         },
         {
-            "name": "controller/ErrorHandler.js"
-        },
-        {
-            "name": "controller/Detail.controller.js"
-        },
-        {
             "name": "controller/BaseController.js"
-        },
-        {
-            "name": "resources.json",
-            "merged": true
-        },
-        {
-            "name": "Component.js"
-        },
-        {
-            "name": "localService/mockserver.js"
-        },
-        {
-            "name": "localService/metadata.xml"
-        },
-        {
-            "name": "extended_runnable_file.html"
         },
         {
             "name": ".project.json"
         },
         {
-            "name": "manifest.json"
-        },
-        {
             "name": ".user.project.json"
-        },
-        {
-            "name": "model/formatter.js"
-        },
-        {
-            "name": "model/models.js"
-        },
-        {
-            "name": "model/GroupSortState.js"
-        },
-        {
-            "name": "neo-app.json"
         }
     ]
 }

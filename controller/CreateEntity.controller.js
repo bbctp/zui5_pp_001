@@ -7,8 +7,8 @@ sap.ui.define(["com/grifols/pp/wf/materials/controller/BaseController", "sap/ui/
 
 		_oBinding: {},
 
-/*Test sobreescibir línea*/
-/*omg*/
+		/*Test sobreescibir línea*/
+		/*omg*/
 
 		/* =========================================================== */
 		/* lifecycle methods                                           */
@@ -48,7 +48,7 @@ sap.ui.define(["com/grifols/pp/wf/materials/controller/BaseController", "sap/ui/
 			this.oUoM = new sap.ui.model.json.JSONModel();
 			// Debido a la limitación que existe de 100 items, indicamos al modelo que puede contener 500 items.
 			this.oUoM.setSizeLimit(500);
-			this.getUoM();
+			//	this.getUoM();
 
 			// Leemos las divisiones
 			this.oDivision = new sap.ui.model.json.JSONModel();
@@ -59,22 +59,19 @@ sap.ui.define(["com/grifols/pp/wf/materials/controller/BaseController", "sap/ui/
 			this.oLangs.setSizeLimit(500);
 			this.getLanguages();
 
-
 			// Cargamos los centros
 			this.oWerks = new sap.ui.model.json.JSONModel();
 			this.getPlants();
-
 
 			// Cargamos las monedas
 			this.oCurr = new sap.ui.model.json.JSONModel();
 			this.oCurr.setSizeLimit(500);
 			this.getCurrencies();
-			
+
 			// Cargamos lasline of business
 			this.oLineBusiness = new sap.ui.model.json.JSONModel();
 			this.oLineBusiness.setSizeLimit(500);
 			this.getLineBusiness();
-			
 
 			// Inicializamos los campos para que este escondidos
 			this.onInitFields();
@@ -118,7 +115,6 @@ sap.ui.define(["com/grifols/pp/wf/materials/controller/BaseController", "sap/ui/
 				}
 			});
 		},
-
 
 		getLanguages: function() {
 			var that = this;
@@ -166,10 +162,25 @@ sap.ui.define(["com/grifols/pp/wf/materials/controller/BaseController", "sap/ui/
 				}
 			});
 		},
-		
+
 		/* =========================================================== */
 		/* event handlers                                              */
 		/* =========================================================== */
+
+		onChangePlant: function() {
+
+			var vPlant = this.getView().byId("Werks_id").getSelectedKey();
+			var oFilter = new sap.ui.model.Filter("Werks", sap.ui.model.FilterOperator.EQ, vPlant);
+			var oFilter1 = new sap.ui.model.Filter("Werks", sap.ui.model.FilterOperator.EQ, "");
+
+			var oFilterLine = new sap.ui.model.Filter([oFilter, oFilter1], false);
+			//get line of business
+
+			this.getView().byId("Zzlnegocio_box_id").getBinding("items").filter(oFilterLine);
+
+			this._validateSaveEnablement();
+
+		},
 
 		/**
 		 * Event handler (attached declaratively) for the view save button. Saves the changes added by the user. 
@@ -190,7 +201,7 @@ sap.ui.define(["com/grifols/pp/wf/materials/controller/BaseController", "sap/ui/
 						// Datos Básicos
 						that.getView().byId("Maktx_id").setValue(oData.Maktx);
 						that.getView().byId("Werks_id").setSelectedKey(oData.Werks);
-						
+
 						that.getView().byId("ZzsubsMat_box_id").setSelectedKey(oData.ZzsubsMat);
 						that.getView().byId("ZzmatnrSubs_id").setValue(oData.ZzmatnrSubs);
 
@@ -265,9 +276,9 @@ sap.ui.define(["com/grifols/pp/wf/materials/controller/BaseController", "sap/ui/
 						that._validateSaveEnablement();
 
 					},
-						error: function(response) {
-					that.onMessageErrorDialogPress();
-				}
+					error: function(response) {
+						that.onMessageErrorDialogPress();
+					}
 				});
 
 				this.getOwnerComponent().getModel().read("/MaterialSet('" + sPetition + "')/goToText", {
@@ -281,9 +292,9 @@ sap.ui.define(["com/grifols/pp/wf/materials/controller/BaseController", "sap/ui/
 							var oRow = {
 								"Spras": oData.results[i].Spras,
 								"Maktx": oData.results[i].Maktx
-							/*	"__metadata": {
-									"type": "ZOD_PP_0001_SRV.MaterialText"
-								}*/
+									/*	"__metadata": {
+											"type": "ZOD_PP_0001_SRV.MaterialText"
+										}*/
 							};
 
 							that.peticion.getData().goToText.push(oRow);
@@ -294,7 +305,7 @@ sap.ui.define(["com/grifols/pp/wf/materials/controller/BaseController", "sap/ui/
 				});
 
 			}
-			
+
 		},
 
 		setVisibleOrNo: function(sID, sValue) {
@@ -309,8 +320,8 @@ sap.ui.define(["com/grifols/pp/wf/materials/controller/BaseController", "sap/ui/
 			}
 
 		},
-		
-		onMessageErrorDialogPress: function () {
+
+		onMessageErrorDialogPress: function() {
 			var dialog = new Dialog({
 				title: 'Error',
 				type: 'Message',
@@ -320,7 +331,7 @@ sap.ui.define(["com/grifols/pp/wf/materials/controller/BaseController", "sap/ui/
 				}),
 				beginButton: new Button({
 					text: 'OK',
-					press: function () {
+					press: function() {
 						dialog.close();
 					}
 				}),
@@ -328,7 +339,7 @@ sap.ui.define(["com/grifols/pp/wf/materials/controller/BaseController", "sap/ui/
 					dialog.destroy();
 				}
 			});
- 
+
 			dialog.open();
 		},
 
@@ -554,12 +565,11 @@ sap.ui.define(["com/grifols/pp/wf/materials/controller/BaseController", "sap/ui/
 
 			this.setBoxState("Zzbiologico_box_id", "Zzbiologico_box_id_lbl", false);
 			this.setBoxState("ZzdgLegal_box_id", "ZzdgLegal_box_id_lbl", false);
-			
+
 			if (sTipoMat === "ROH") {
 				this.setBoxState("ZzctrlCalidad_box_id", "ZzctrlCalidad_box_id_lbl", false);
 			}
-			
-			
+
 			if (sTipoMat === "ROH" && sStandard === "S" && sKey === "P") {
 				this.setBoxState("ZzdgLegal_box_id", "ZzdgLegal_box_id_lbl", false);
 				this.setBoxState("ZzctrlCalidad_box_id", "ZzctrlCalidad_box_id_lbl", true);
@@ -661,7 +671,7 @@ sap.ui.define(["com/grifols/pp/wf/materials/controller/BaseController", "sap/ui/
 			var sField = oEvent.getSource().getProperty('name');
 
 			this.oValueHelpDialog = new sap.ui.comp.valuehelpdialog.ValueHelpDialog({
-				basicSearchText: "basicSearchText",
+
 				title: this.getResourceBundle().getText("uom"),
 				supportMultiselect: false,
 				supportRanges: false,
@@ -694,40 +704,69 @@ sap.ui.define(["com/grifols/pp/wf/materials/controller/BaseController", "sap/ui/
 					template: "Msehi"
 				}, {
 					label: this.getResourceBundle().getText("description"),
-					template: "Msehl"
+					template: "Msehl",
+					demandPopin: true
 				}]
 			});
-
 			this.oValueHelpDialog.getTable().setModel(oColModel, "columns");
+
+			if (this.oValueHelpDialog.getTable().bindRows) {
+				this.oValueHelpDialog.getTable().bindRows("/");
+			}
+			if (this.oValueHelpDialog.getTable().bindItems) {
+				var oTable = this.oValueHelpDialog.getTable();
+
+				oTable.bindAggregation("items", "/", function(sId, oContext) {
+					var aCols = oTable.getModel("columns").getData().cols;
+
+					return new sap.m.ColumnListItem({
+						cells: aCols.map(function(column) {
+							var colname = column.template;
+							return new sap.m.Label({
+								text: "{" + colname + "}"
+							});
+						})
+					});
+				});
+			}
 
 			var oFilterBar = new sap.ui.comp.filterbar.FilterBar({
 				advancedMode: false,
 				filterBarExpanded: true,
+				showFilterConfiguration: false,
 				showGoOnFB: !sap.ui.Device.system.phone,
 				filterItems: [
 					new sap.ui.comp.filterbar.FilterItem({
 						name: "Msehi",
 						label: this.getResourceBundle().getText("uom"),
-						control: new sap.m.Input()
+						control: new sap.m.Input({
+							submit: function() {
+								that.oValueHelpDialog.getFilterBar().search();
+							}
+						})
+
 					}),
 					new sap.ui.comp.filterbar.FilterItem({
 						name: "Msehl",
 						label: this.getResourceBundle().getText("description"),
-						control: new sap.m.Input()
+						control: new sap.m.Input({
+							submit: function() {
+								that.oValueHelpDialog.getFilterBar().search();
+							}
+						})
 					})
 				],
 
 				search: function(oEventSearch) {
 
-					var aFilters = oEventSearch.getParameter("selectionSet");
-
-					var aOdataFilters = [
-						new sap.ui.model.Filter("Msehi", sap.ui.model.FilterOperator.EQ, aFilters[0].getValue()),
-						new sap.ui.model.Filter("Msehl", sap.ui.model.FilterOperator.EQ, aFilters[1].getValue())
+					var aOdataFilters = oEventSearch.getParameter("selectionSet");
+					var aFilters = [
+						new sap.ui.model.Filter("Msehi", sap.ui.model.FilterOperator.EQ, aOdataFilters[0].getValue().toString().toUpperCase()),
+						new sap.ui.model.Filter("Msehl", sap.ui.model.FilterOperator.EQ, aOdataFilters[1].getValue())
 					];
 
 					that.getOwnerComponent().getModel().read("/UoMSet", {
-						filters: aOdataFilters,
+						filters: aFilters,
 						async: false,
 						success: function(oData, oResponse) {
 							that.oUoM.setData(oData.results);
@@ -739,19 +778,37 @@ sap.ui.define(["com/grifols/pp/wf/materials/controller/BaseController", "sap/ui/
 
 				}
 			});
-
 			this.oValueHelpDialog.setFilterBar(oFilterBar);
 			this.oValueHelpDialog.addStyleClass("sapUiSizeCozy");
 			this.oValueHelpDialog.open();
 
 		},
+
+		applyUoMFilter: function(question) {
+
+			var aFilters = [
+				new sap.ui.model.Filter("Msehi", sap.ui.model.FilterOperator.Contains, question),
+				new sap.ui.model.Filter("Msehl", sap.ui.model.FilterOperator.Contains, question)
+			];
+
+			var filter = new sap.ui.model.Filter({
+				filters: aFilters,
+				and: false
+			});
+
+			var oTable1 = this.oValueHelpDialog.getTable();
+
+			oTable1.getBinding("rows").filter(filter);
+
+		},
+
 		onAddRow: function(oEvent) {
 			var oRow = {
 				"Spras": "",
 				"Maktx": ""
-				/*"__metadata": {
-					"type": "ZOD_PP_0001_SRV.MaterialText"
-				}*/
+					/*"__metadata": {
+						"type": "ZOD_PP_0001_SRV.MaterialText"
+					}*/
 			};
 
 			this.peticion.getData().goToText.push(oRow);
