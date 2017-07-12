@@ -1,14 +1,12 @@
 sap.ui.define(["com/grifols/pp/wf/materials/controller/BaseController", "sap/ui/model/json/JSONModel", "sap/m/Button", "sap/m/Dialog",
 	"sap/m/MessageBox"
+
 ], function(BaseController, JSONModel, Button, Dialog, MessageBox) {
 	"use strict";
 
 	return BaseController.extend("com.grifols.pp.wf.materials.controller.CreateEntity", {
 
 		_oBinding: {},
-
-		/*Test sobreescibir línea*/
-		/*omg*/
 
 		/* =========================================================== */
 		/* lifecycle methods                                           */
@@ -19,8 +17,8 @@ sap.ui.define(["com/grifols/pp/wf/materials/controller/BaseController", "sap/ui/
 			jQuery.sap.require("sap.ui.comp.valuehelpdialog.ValueHelpDialog");
 
 			var that = this;
-			this.getRouter().getTargets().getTarget("create").attachDisplay(null, this._onDisplay, this);
-			this._oODataModel = this.getOwnerComponent().getModel();
+			this.oComponent = this.getOwnerComponent();
+			this._oODataModel = this.oComponent.getModel();
 			this._oResourceBundle = this.getResourceBundle();
 			this._oViewModel = new JSONModel({
 				enableCreate: false,
@@ -30,6 +28,8 @@ sap.ui.define(["com/grifols/pp/wf/materials/controller/BaseController", "sap/ui/
 				viewTitle: ""
 			});
 			this.setModel(this._oViewModel, "viewModel");
+
+			this.getRouter().getTargets().getTarget("create").attachDisplay(null, this._onDisplay, this);
 
 			// Register the view with the message manager
 			sap.ui.getCore().getMessageManager().registerObject(this.getView(), true);
@@ -46,9 +46,6 @@ sap.ui.define(["com/grifols/pp/wf/materials/controller/BaseController", "sap/ui/
 
 			// Leemos las unidades de medida
 			this.oUoM = new sap.ui.model.json.JSONModel();
-			// Debido a la limitación que existe de 100 items, indicamos al modelo que puede contener 500 items.
-			this.oUoM.setSizeLimit(500);
-			//	this.getUoM();
 
 			// Leemos las divisiones
 			this.oDivision = new sap.ui.model.json.JSONModel();
@@ -68,13 +65,13 @@ sap.ui.define(["com/grifols/pp/wf/materials/controller/BaseController", "sap/ui/
 			this.oCurr.setSizeLimit(500);
 			this.getCurrencies();
 
-			// Cargamos lasline of business
+			// Cargamos las line of business
 			this.oLineBusiness = new sap.ui.model.json.JSONModel();
 			this.oLineBusiness.setSizeLimit(500);
 			this.getLineBusiness();
 
 			// Inicializamos los campos para que este escondidos
-			this.onInitFields();
+			//	this.onInitFields();
 		},
 
 		getLabor: function() {
@@ -82,9 +79,7 @@ sap.ui.define(["com/grifols/pp/wf/materials/controller/BaseController", "sap/ui/
 
 			this.getOwnerComponent().getModel().read("/ParameterSet('ZPP_LABOR')", {
 				async: false,
-				success: function(oData, oResponse) {
-
-				},
+				success: function(oData, oResponse) {},
 				error: function(oResponse) {
 					that.bErrorLabor = true;
 				}
@@ -230,8 +225,10 @@ sap.ui.define(["com/grifols/pp/wf/materials/controller/BaseController", "sap/ui/
 						}
 
 						// Unidades de medida
-						that.getView().byId("Meins_id").setSelectedKey(oData.Meins);
-						that.getView().byId("Meinh_id").setSelectedKey(oData.Meinh);
+						that.getView().byId("Meins_id").setValue(oData.Meins);
+						that.getView().byId("Meinh_id").setValue(oData.Meinh);
+						//		that.getView().byId("Meins_id").setSelectedKey(oData.Meins);
+						//		that.getView().byId("Meinh_id").setSelectedKey(oData.Meinh);
 						that.getView().byId("Umren_id").setValue(oData.Umren);
 
 						// Arbol decision
@@ -353,14 +350,27 @@ sap.ui.define(["com/grifols/pp/wf/materials/controller/BaseController", "sap/ui/
 				success: function(response) {
 
 					that._oViewModel.setProperty("/enableCreate", true);
+					sap.m.MessageBox.success(that._oResourceBundle.getText("petitionHasBeenCreated"), {
+					//	title: "Success", // default
+						onClose: function(oAction) {
+							if (oAction === sap.m.MessageBox.Action.OK) {
+									that._oODataModel.deleteCreatedEntry(that.oContextCreated);
+									that._showDetail(response.Zzpeticion);
+							}
+						},
+						styleClass: that.oComponent.getContentDensityClass()
+					});
 
-					sap.m.MessageToast.show(that._oResourceBundle.getText("petitionHasBeenCreated"));
+				
 
-					that._oODataModel.deleteCreatedEntry(that.oContextCreated);
+				//	that._oODataModel.deleteCreatedEntry(that.oContextCreated);
 
-					that._showDetail(response.Zzpeticion);
+				//	that._showDetail(response.Zzpeticion);
 				},
 				error: function(response) {
+
+					//	var viewMaster = that.oComponent._oViews._oViews["com.grifols.pp.wf.materials.view.Master"]
+					// viewMaster.getModel("masterView").getData()
 					that._oViewModel.setProperty("/enableCreate", true);
 				}
 			});
@@ -905,7 +915,7 @@ sap.ui.define(["com/grifols/pp/wf/materials/controller/BaseController", "sap/ui/
 
 		_onCreate: function(oEvent) {
 
-			var that = this;
+			//	var that = this;
 
 			if (oEvent.getParameter("name") && oEvent.getParameter("name") !== "create") {
 				this._oViewModel.setProperty("/enableCreate", false);
@@ -930,7 +940,7 @@ sap.ui.define(["com/grifols/pp/wf/materials/controller/BaseController", "sap/ui/
 
 			this.peticion.setData(this._oODataModel.oData[oContext.sPath.substring(1)]);
 
-			this.peticion.getData().ZzprodAcab = "";
+			/*		this.peticion.getData().ZzprodAcab = "";
 			this.peticion.getData().ZzfabInt = "";
 			this.peticion.getData().ZztipoMat = "";
 			this.peticion.getData().ZzdgLegal = "";
@@ -939,7 +949,7 @@ sap.ui.define(["com/grifols/pp/wf/materials/controller/BaseController", "sap/ui/
 			this.peticion.getData().ZzctrlCalidad = "";
 			this.peticion.getData().Zzbiologico = "";
 			this.peticion.getData().Zzdisenyo = "";
-
+*/
 			var languages = [];
 
 			var oUser = sap.ushell.Container.getUser();
