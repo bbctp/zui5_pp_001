@@ -63,12 +63,13 @@ xmlns:smart="sap.ui.comp.smartfield" xmlns="sap.m" controllerName="com.grifols.p
 					</Select>
 					-->
 					<Label text="{i18n>alternativeUOM}"/>
-					
-					<Select items="{UoMM>/}" selectedKey="{ path: 'Peticion>/Meinh', type: 'sap.ui.model.odata.type.String' , constraints:{ maxLength:3 } }" id="Meinh_id" change="_validateSaveEnablement">
+					<MultiInput id="Meinh_id" name="Meinh" valueHelpOnly="true" showValueHelp="true" valueHelpRequest="onValueHelpRequestUoM" maxTokens="1" maxLength="3" /> 		
+	
+			<!--		<Select items="{UoMM>/}" selectedKey="{ path: 'Peticion>/Meinh', type: 'sap.ui.model.odata.type.String' , constraints:{ maxLength:3 } }" id="Meinh_id" change="_validateSaveEnablement">
 					    <items>
 					    	<core:ListItem text="{UoMM>Msehl}" key="{UoMM>Msehi}" id="Meinh_item"/>
 					    </items>
-					</Select>
+					</Select> -->
 					
 					<Label text="{i18n>conversionAUOM}"/>
 					<Input name="Umren" id="Umren_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement" visible="true" value="{ path: 'Peticion>/Umren', type: 'sap.ui.model.odata.type.Decimal' , constraints:{ precision:5, scale:0 } }"/>
