@@ -5,8 +5,11 @@ sap.ui.define([
 	"use strict";
 
 	return BaseController.extend("com.grifols.pp.wf.materials.controller.App", {
-
+		
 		onInit: function() {
+			
+				jQuery.sap.require("sap.ui.model.type.Float");
+				
 			var oViewModel,
 				fnSetAppNotBusy,
 				oListSelector = this.getOwnerComponent().oListSelector,

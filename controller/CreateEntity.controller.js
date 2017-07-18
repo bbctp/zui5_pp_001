@@ -15,6 +15,7 @@ sap.ui.define(["com/grifols/pp/wf/materials/controller/BaseController", "sap/ui/
 		onInit: function() {
 			// Importamos el objeto de value help
 			jQuery.sap.require("sap.ui.comp.valuehelpdialog.ValueHelpDialog");
+		
 
 			var that = this;
 			this.oComponent = this.getOwnerComponent();
@@ -811,6 +812,7 @@ sap.ui.define(["com/grifols/pp/wf/materials/controller/BaseController", "sap/ui/
 			oTable1.getBinding("rows").filter(filter);
 
 		},
+		
 
 		onAddRow: function(oEvent) {
 			var oRow = {

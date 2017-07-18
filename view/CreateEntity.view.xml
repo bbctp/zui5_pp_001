@@ -166,10 +166,17 @@ xmlns:smart="sap.ui.comp.smartfield" xmlns="sap.m" controllerName="com.grifols.p
 					<Label text="{i18n>vendorInternalRef}" required="false"/>
 					<Input name="Idnlf" id="Idnlf_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement" visible="true" value="{ path: 'Peticion>/Idnlf', type: 'sap.ui.model.odata.type.String' , constraints:{ maxLength:35 } }"/>
 					<Label text="{i18n>netPrice}" required="false"/>
-					<Input name="Netpr" id="Netpr_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement" visible="true" value="{ path: 'Peticion>/Netpr', type: 'sap.ui.model.odata.type.Decimal' , constraints:{ precision:12 } }"/>
-					<Select items="{Curr>/}" selectedKey="{ path: 'Peticion>/Waers', type: 'sap.ui.model.odata.type.String' , constraints:{ maxLength:5 } }" id="Waersbox_id">
+					<Input name="Netpr" id="Netpr_id" 
+					liveChange="_validateSaveEnablement"
+					value="{path:'Peticion>/Netpr', type:'sap.ui.model.odata.type.Decimal', constraints: {scale: 2}, formatOptions: {
+																							decimals: 2,
+																					        maxFractionDigits: 2,
+																					        decimalSeparator: ','
+																					    }}" />
+				
+					<Select items="{Curr>/}" selectedKey="{ path: 'Peticion>/Waers'}" id="Waersbox_id">
 					    <items>
-					    	<core:ListItem text="{Curr>Ltext}" key="{Curr>Waers}" id="Waers_item"/>
+					    	<core:ListItem text="{Curr>Ktext}" key="{Curr>Waers}" id="Waers_item"/>
 					     </items>
 					</Select>
 					
