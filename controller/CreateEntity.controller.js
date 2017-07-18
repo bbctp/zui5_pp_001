@@ -940,7 +940,7 @@ sap.ui.define(["com/grifols/pp/wf/materials/controller/BaseController", "sap/ui/
 
 			this.peticion.setData(this._oODataModel.oData[oContext.sPath.substring(1)]);
 
-			/*		this.peticion.getData().ZzprodAcab = "";
+					this.peticion.getData().ZzprodAcab = "";
 			this.peticion.getData().ZzfabInt = "";
 			this.peticion.getData().ZztipoMat = "";
 			this.peticion.getData().ZzdgLegal = "";
@@ -949,7 +949,7 @@ sap.ui.define(["com/grifols/pp/wf/materials/controller/BaseController", "sap/ui/
 			this.peticion.getData().ZzctrlCalidad = "";
 			this.peticion.getData().Zzbiologico = "";
 			this.peticion.getData().Zzdisenyo = "";
-*/
+
 			var languages = [];
 
 			var oUser = sap.ushell.Container.getUser();
