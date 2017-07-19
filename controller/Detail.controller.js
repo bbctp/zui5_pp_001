@@ -31,31 +31,35 @@ sap.ui.define([
 			this.getOwnerComponent().getModel().metadataLoaded().then(this._onMetadataLoaded.bind(this));
 			this._oODataModel = this.getOwnerComponent().getModel();
 			this._oResourceBundle = this.getResourceBundle();
-			
-						// Cargamos los idiomas
+
+			// Cargamos los idiomas
 			this.oLangs = new sap.ui.model.json.JSONModel();
 			this.getLanguages();
-			
-				// Cargamos lasline of business
+
+			// Cargamos lasline of business
 			this.oLineBusiness = new sap.ui.model.json.JSONModel();
 			this.getLineBusiness();
-			
-				// Leemos las divisiones
+
+			// Leemos las divisiones
 			this.oDivision = new sap.ui.model.json.JSONModel();
 			this.getDivision();
-			
+
 			// Leemos las unidades de medida
 			this.oUoM = new sap.ui.model.json.JSONModel();
 			// Debido a la limitación que existe de 100 items, indicamos al modelo que puede contener 500 items.
 			this.oUoM.setSizeLimit(500);
 			this.getUoM();
-			
-				// Cargamos los centros
+
+			// Cargamos los centros
 			this.oWerks = new sap.ui.model.json.JSONModel();
 			this.getPlants();
-			
+
+			// Cargamos las monedas
+			this.oCurr = new sap.ui.model.json.JSONModel();
+			this.oCurr.setSizeLimit(500);
+			this.getCurrencies();
 		},
-		
+
 		getLanguages: function() {
 			var that = this;
 
@@ -68,7 +72,7 @@ sap.ui.define([
 			});
 
 		},
-		
+
 		getDivision: function() {
 			var that = this;
 			this.getOwnerComponent().getModel().read("/DivisionSet", {
@@ -79,8 +83,7 @@ sap.ui.define([
 				}
 			});
 		},
-		
-		
+
 		getLineBusiness: function() {
 			var that = this;
 			this.getOwnerComponent().getModel().read("/LineOfBusinessSet", {
@@ -91,8 +94,8 @@ sap.ui.define([
 				}
 			});
 		},
-		
-			getUoM: function() {
+
+		getUoM: function() {
 			var that = this;
 
 			this.getOwnerComponent().getModel().read("/UoMSet", {
@@ -103,7 +106,7 @@ sap.ui.define([
 				}
 			});
 		},
-		
+
 		getPlants: function() {
 			var that = this;
 
@@ -114,6 +117,18 @@ sap.ui.define([
 					that.getView().setModel(that.oWerks, "Plants");
 				}
 			});
+		},
+		getCurrencies: function() {
+			var that = this;
+
+			this.getOwnerComponent().getModel().read("/CurrencySet", {
+				async: false,
+				success: function(oData, oResponse) {
+					that.oCurr.setData(oData.results);
+					that.getView().setModel(that.oCurr, "Curr");
+				}
+			});
+
 		},
 
 		/* =========================================================== */

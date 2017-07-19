@@ -37,15 +37,14 @@
 					<Label text="{i18n>businessLine}"/>
 					<ComboBox items="{LineOfBusiness>/}" selectedKey="{ path: 'Zzlnegocio' }" id="Zzlnegocio_box_id" editable="false">
 						<items>
-							<sap.ui.core:ListItem text="{LineOfBusiness>ZNeg_Text} - {LineOfBusiness>Werks}" key="{LineOfBusiness>ZLine_Neg}" id="LineBusiness_item"/>
+							<sap.ui.core:ListItem  text="{LineOfBusiness>ZNeg_Text}" key="{LineOfBusiness>ZLine_Neg}"  id="LineBusiness_item"/>
 						</items>
 					</ComboBox>
 					<Label text="{i18n>division}"/>
 					<ComboBox items="{Division>/}" selectedKey="{ path: 'Zzdivision' }" id="Zzdivision_box_id" editable="false">
 						<items>
 								<sap.ui.core:ListItem text="{Division>Vtext}" key="{Division>Prodh}" id="division_item"/>
-					<!--
-							<sap.ui.core:ListItem text="{i18n>others}" key="OTHERS" id="__item26"/> -->
+				
 						</items>
 					</ComboBox>
 					<Label text="{i18n>hierarchyIndicate}" width="100%" id="Other_division_id_lbl"/>
@@ -65,8 +64,14 @@
 					
 			<!--		<Input name="Meins" id="Meins_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement" visible="true" value="{ path: 'Meins', type: 'sap.ui.model.odata.type.String' , constraints:{ maxLength:3 } }" valueHelpRequest="onValueHelpRequestUoM" showValueHelp="true" editable="false"/>
 			-->		<Label text="{i18n>alternativeUOM}"/>
-					<Input name="Meinh" id="Meinh_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement" visible="true" value="{ path: 'Meinh', type: 'sap.ui.model.odata.type.String' , constraints:{ maxLength:3 } }" showValueHelp="true" valueHelpRequest="onValueHelpRequestUoM" editable="false"/>
-					<Label text="{i18n>conversionAUOM}"/>
+					<ComboBox items="{UoMM>/}" selectedKey="{ path: 'Meinh' }" id="Meinh_id" editable="false">
+					    <items>
+					    	<sap.ui.core:ListItem text="{UoMM>Msehl}" key="{UoMM>Msehi}" id="Meinh_item"/>
+					    </items>
+					</ComboBox>
+					
+			<!--		<Input name="Meinh" id="Meinh_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement" visible="true" value="{ path: 'Meinh', type: 'sap.ui.model.odata.type.String' , constraints:{ maxLength:3 } }" showValueHelp="true" valueHelpRequest="onValueHelpRequestUoM" editable="false"/>
+			-->		<Label text="{i18n>conversionAUOM}"/>
 					<Input name="Umren" id="Umren_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement" visible="true" value="{ path: 'Umren', type: 'sap.ui.model.odata.type.Decimal' , constraints:{ precision:5, scale:0 } }" editable="false"/>
 				</sap.ui.layout.form:content>
 			</sap.ui.layout.form:SimpleForm>
@@ -154,7 +159,15 @@
 					<Label text="{i18n>netPrice}"/>
 					<Input name="Netpr" id="Netpr_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement" visible="true" value="{ path: 'Netpr', type: 'sap.ui.model.odata.type.Decimal' , constraints:{ precision:12, scale:3 } }" editable="false"/>
 					<Label text="{i18n>currency}"/>
-					<Input name="Waers" id="Waers_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement" visible="true" value="{ path: 'Waers', type: 'sap.ui.model.odata.type.String' , constraints:{ maxLength:5 } }" editable="false"/>
+					<ComboBox items="{Curr>/}" selectedKey="{ path: 'Waers' }" id="Waers_id" editable="false">
+					    <items>
+					    	<sap.ui.core:ListItem text="{Curr>Ktext}" key="{Curr>Waers}" id="Waers_item"/>
+					    </items>
+					</ComboBox>
+						
+					
+				<!--	<Input name="Waers" id="Waers_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement" visible="true" value="{ path: 'Waers', type: 'sap.ui.model.odata.type.String' , constraints:{ maxLength:5 } }" editable="false"/>
+				-->
 					<Label text="{i18n>deliveryTerm}"/>
 					<Input name="Eeind" id="Eeind_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement" visible="true" value="{ path: 'Eeind', type: 'sap.ui.model.odata.type.String' , constraints:{ maxLength:10 } }" editable="false"/>
 					<Label text="{i18n>purchaseFromGroup}"/>

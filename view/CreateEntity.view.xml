@@ -182,7 +182,7 @@ xmlns:smart="sap.ui.comp.smartfield" xmlns="sap.m" controllerName="com.grifols.p
 					
 					<Label text="{i18n>deliveryTerm}" required="false"/>
 					<Input name="Eeind" id="Eeind_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement" visible="true" value="{ path: 'Peticion>/Eeind', type: 'sap.ui.model.odata.type.String' , constraints:{ maxLength:10 } }"/>
-					<Label text="{i18n>purchaseFromGroup}" required="false"/>
+					<Label text="{i18n>purchaseFromGroup}" required="false" wrapping="true" />
 					<Input name="ZzcompraGrupo" id="ZzcompraGrupo_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement" visible="true" value="{ path: 'Peticion>/ZzcompraGrupo', type: 'sap.ui.model.odata.type.String' , constraints:{ maxLength:1 } }"/>
 					<Label text="{i18n>companyCode}" required="false"/>
 					<Input name="ZzempresaCompra" id="ZzempresaCompra_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement" visible="true" value="{ path: 'Peticion>/ZzempresaCompra', type: 'sap.ui.model.odata.type.String' , constraints:{ maxLength:4 } }"/>
