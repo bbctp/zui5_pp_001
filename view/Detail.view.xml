@@ -157,7 +157,12 @@
 					<Label text="{i18n>vendorInternalRef}"/>
 					<Input name="Idnlf" id="Idnlf_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement" visible="true" value="{ path: 'Idnlf', type: 'sap.ui.model.odata.type.String' , constraints:{ maxLength:35 } }" editable="false"/>
 					<Label text="{i18n>netPrice}"/>
-					<Input name="Netpr" id="Netpr_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement" visible="true" value="{ path: 'Netpr', type: 'sap.ui.model.odata.type.Decimal' , constraints:{ precision:12, scale:3 } }" editable="false"/>
+		<!--			<Input name="Netpr" id="Netpr_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement" visible="true" value="{ path: 'Netpr', type: 'sap.ui.model.odata.type.Decimal' , constraints:{ precision:12, scale:3 } }" editable="false"/>
+			-->		
+					<Input name="Netpr" id="Netpr_id" liveChange="_validateSaveEnablement"  editable="false"
+						value="{path:'Netpr', type:'sap.ui.model.odata.type.Decimal', constraints: {scale: 2}, formatOptions: { decimals: 2, maxFractionDigits: 2, decimalSeparator: ',' }}"/>
+					
+				
 					<Label text="{i18n>currency}"/>
 					<ComboBox items="{Curr>/}" selectedKey="{ path: 'Waers' }" id="Waers_id" editable="false">
 					    <items>

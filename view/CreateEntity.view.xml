@@ -58,13 +58,9 @@
 					</Select>
 					-->
 					<Label text="{i18n>alternativeUOM}"/>
-					<MultiInput id="Meinh_id" name="Meinh" valueHelpOnly="true" value="{Peticion>/Meinh}" showValueHelp="true"
+					<MultiInput id="Meinh_id" name="Meinh" value="{Peticion>/Meinh}" showValueHelp="true"
 						valueHelpRequest="onValueHelpRequestUoM" maxTokens="1" maxLength="3"/>
-					<!--		<Select items="{UoMM>/}" selectedKey="{ path: 'Peticion>/Meinh', type: 'sap.ui.model.odata.type.String' , constraints:{ maxLength:3 } }" id="Meinh_id" change="_validateSaveEnablement">
-					    <items>
-					    	<core:ListItem text="{UoMM>Msehl}" key="{UoMM>Msehi}" id="Meinh_item"/>
-					    </items>
-					</Select> -->
+				
 					<Label text="{i18n>conversionAUOM}"/>
 					<Input name="Umren" id="Umren_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement" visible="true"
 						value="{ path: 'Peticion>/Umren', type: 'sap.ui.model.odata.type.Decimal' , constraints:{ precision:5, scale:0 } }"/>
@@ -176,6 +172,9 @@
 					<Label text="{i18n>netPrice}" required="false"/>
 					<Input name="Netpr" id="Netpr_id" liveChange="_validateSaveEnablement"
 						value="{path:'Peticion>/Netpr', type:'sap.ui.model.odata.type.Decimal', constraints: {scale: 2}, formatOptions: { decimals: 2, maxFractionDigits: 2, decimalSeparator: ',' }}"/>
+					
+					
+					
 					<Select items="{Curr>/}" selectedKey="{ path: 'Peticion>/Waers'}" id="Waersbox_id">
 						<items>
 							<core:ListItem text="{Curr>Ktext}" key="{Curr>Waers}" id="Waers_item"/>

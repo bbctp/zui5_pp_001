@@ -15,7 +15,6 @@ sap.ui.define(["com/grifols/pp/wf/materials/controller/BaseController", "sap/ui/
 		onInit: function() {
 			// Importamos el objeto de value help
 			jQuery.sap.require("sap.ui.comp.valuehelpdialog.ValueHelpDialog");
-		
 
 			var that = this;
 			this.oComponent = this.getOwnerComponent();
@@ -184,6 +183,9 @@ sap.ui.define(["com/grifols/pp/wf/materials/controller/BaseController", "sap/ui/
 		 * @public
 		 */
 		onCopyPetition: function() {
+
+			this.copyPetition = new sap.ui.model.json.JSONModel();
+
 			var that = this;
 
 			var sPetition = this.getView().byId("petition_id").getValue();
@@ -194,83 +196,24 @@ sap.ui.define(["com/grifols/pp/wf/materials/controller/BaseController", "sap/ui/
 					async: false,
 					success: function(oData, oResponse) {
 
-						// Datos Básicos
-						that.getView().byId("Maktx_id").setValue(oData.Maktx);
-						that.getView().byId("Werks_id").setSelectedKey(oData.Werks);
+						that.peticion.setData(oData);
 
-						that.getView().byId("ZzsubsMat_box_id").setSelectedKey(oData.ZzsubsMat);
-						that.getView().byId("ZzmatnrSubs_id").setValue(oData.ZzmatnrSubs);
+						// delete values from variables and set visibility
+						that.peticion.getData().Zzpeticion = '';
 
-						if (oData.ZzsubsMat === "Y") {
-							that.getView().byId("ZzmatnrSubs_id").setVisible(true);
-							that.getView().byId("ZzmatnrSubs_id_lbl").setVisible(true);
-							that.getView().byId("ZzmatnrSubs_id_lbl").setRequired(true);
-						} else {
-							that.getView().byId("ZzmatnrSubs_id").setVisible(false);
-							that.getView().byId("ZzmatnrSubs_id_lbl").setVisible(false);
-							that.getView().byId("ZzmatnrSubs_id_lbl").setRequired(false);
-						}
-
-						that.getView().byId("Zzlnegocio_box_id").setSelectedKey(oData.Zzlnegocio);
-						that.getView().byId("Zzdivision_box_id").setSelectedKey(oData.Zzdivision);
-						that.getView().byId("Other_division_id").setValue(oData.ZzdivOthers);
-
-						if (oData.Zzdivision === "OTHERS") {
-							that.getView().byId("Other_division_id").setVisible(true);
-							that.getView().byId("Other_division_id_lbl").setVisible(true);
-							that.getView().byId("Other_division_id_lbl").setRequired(true);
-						} else {
-							that.getView().byId("Other_division_id").setVisible(false);
-							that.getView().byId("Other_division_id_lbl").setVisible(false);
-							that.getView().byId("Other_division_id_lbl").setRequired(false);
-						}
-
-						// Unidades de medida
-						that.getView().byId("Meins_id").setValue(oData.Meins);
-						that.getView().byId("Meinh_id").setValue(oData.Meinh);
-						//		that.getView().byId("Meins_id").setSelectedKey(oData.Meins);
-						//		that.getView().byId("Meinh_id").setSelectedKey(oData.Meinh);
-						that.getView().byId("Umren_id").setValue(oData.Umren);
-
+						that.setVisibleOrNo("ZzmatnrSubs_id", oData.ZzmatnrSubs);
+						that.setVisibleOrNo("Other_division_id", oData.ZzdivOthers);
 						// Arbol decision
-						that.getView().byId("ZzprodAcab_box_id").setSelectedKey(oData.ZzprodAcab);
 						that.setVisibleOrNo("ZzprodAcab_box_id", oData.ZzprodAcab);
-
-						that.getView().byId("Zzestructura_box_id").setSelectedKey(oData.Zzestructura);
 						that.setVisibleOrNo("Zzestructura_box_id", oData.Zzestructura);
-
-						that.getView().byId("ZztipoMat_box_id").setSelectedKey(oData.ZztipoMat);
 						that.setVisibleOrNo("ZztipoMat_box_id", oData.ZztipoMat);
-
-						that.getView().byId("ZzfabInt_box_id").setSelectedKey(oData.ZzfabInt);
 						that.setVisibleOrNo("ZzfabInt_box_id", oData.ZzfabInt);
-
-						that.getView().byId("ZzdgLegal_box_id").setSelectedKey(oData.ZzdgLegal);
 						that.setVisibleOrNo("ZzdgLegal_box_id", oData.ZzdgLegal);
-
-						that.getView().byId("ZzestanEspecDg_box_id").setSelectedKey(oData.ZzestanEspecDg);
 						that.setVisibleOrNo("ZzestanEspecDg_box_id", oData.ZzestanEspecDg);
-
-						that.getView().byId("ZzctrlCalidad_box_id").setSelectedKey(oData.ZzctrlCalidad);
 						that.setVisibleOrNo("ZzctrlCalidad_box_id", oData.ZzctrlCalidad);
-
-						that.getView().byId("Zzbiologico_box_id").setSelectedKey(oData.Zzbiologico);
 						that.setVisibleOrNo("Zzbiologico_box_id", oData.Zzbiologico);
-
-						that.getView().byId("Zzdisenyo_box_id").setSelectedKey(oData.Zzdisenyo);
 						that.setVisibleOrNo("Zzdisenyo_box_id", oData.Zzdisenyo);
 
-						// Informacion adicional
-						that.getView().byId("Zzconsumo_id").setValue(oData.Zzconsumo);
-						that.getView().byId("Lifnr_id").setValue(oData.Lifnr);
-						that.getView().byId("Name1_id").setValue(oData.Name1);
-						that.getView().byId("Idnlf_id").setValue(oData.Idnlf);
-						that.getView().byId("Netpr_id").setValue(oData.Netpr);
-						that.getView().byId("Waersbox_id").setSelectedKey(oData.Waers);
-						that.getView().byId("Eeind_id").setValue(oData.Eeind);
-						that.getView().byId("ZzcompraGrupo_id").setValue(oData.ZzcompraGrupo);
-						that.getView().byId("ZzempresaCompra_id").setValue(oData.ZzempresaCompra);
-						that.getView().byId("Zzotros_id").setValue(oData.Zzotros);
 						that._validateSaveEnablement();
 
 					},
@@ -283,25 +226,19 @@ sap.ui.define(["com/grifols/pp/wf/materials/controller/BaseController", "sap/ui/
 					async: false,
 					success: function(oData, oResponse) {
 						var i;
-
 						that.peticion.getData().goToText = [];
 
 						for (i in oData.results) {
 							var oRow = {
 								"Spras": oData.results[i].Spras,
 								"Maktx": oData.results[i].Maktx
-									/*	"__metadata": {
-											"type": "ZOD_PP_0001_SRV.MaterialText"
-										}*/
 							};
-
 							that.peticion.getData().goToText.push(oRow);
 						}
-
-						that.getView().getModel("Peticion").refresh(true);
+							that.getView().getModel("Peticion").refresh(true);
 					}
 				});
-
+				that.getView().getModel("Peticion").refresh(true);
 			}
 
 		},
@@ -320,12 +257,14 @@ sap.ui.define(["com/grifols/pp/wf/materials/controller/BaseController", "sap/ui/
 		},
 
 		onMessageErrorDialogPress: function() {
+			var that = this;
+			
 			var dialog = new Dialog({
 				title: 'Error',
 				type: 'Message',
 				state: 'Error',
 				content: new sap.m.Text({
-					text: "The only error you can make is not even trying."
+					text: that._oResourceBundle.getText("petitionErrorCopy")
 				}),
 				beginButton: new Button({
 					text: 'OK',
@@ -352,26 +291,17 @@ sap.ui.define(["com/grifols/pp/wf/materials/controller/BaseController", "sap/ui/
 
 					that._oViewModel.setProperty("/enableCreate", true);
 					sap.m.MessageBox.success(that._oResourceBundle.getText("petitionHasBeenCreated"), {
-					//	title: "Success", // default
+						//	title: "Success", // default
 						onClose: function(oAction) {
 							if (oAction === sap.m.MessageBox.Action.OK) {
-									that._oODataModel.deleteCreatedEntry(that.oContextCreated);
-									that._showDetail(response.Zzpeticion);
+								that._oODataModel.deleteCreatedEntry(that.oContextCreated);
+								that._showDetail(response.Zzpeticion);
 							}
 						},
 						styleClass: that.oComponent.getContentDensityClass()
 					});
-
-				
-
-				//	that._oODataModel.deleteCreatedEntry(that.oContextCreated);
-
-				//	that._showDetail(response.Zzpeticion);
 				},
 				error: function(response) {
-
-					//	var viewMaster = that.oComponent._oViews._oViews["com.grifols.pp.wf.materials.view.Master"]
-					// viewMaster.getModel("masterView").getData()
 					that._oViewModel.setProperty("/enableCreate", true);
 				}
 			});
@@ -812,15 +742,11 @@ sap.ui.define(["com/grifols/pp/wf/materials/controller/BaseController", "sap/ui/
 			oTable1.getBinding("rows").filter(filter);
 
 		},
-		
 
 		onAddRow: function(oEvent) {
 			var oRow = {
 				"Spras": "",
 				"Maktx": ""
-					/*"__metadata": {
-						"type": "ZOD_PP_0001_SRV.MaterialText"
-					}*/
 			};
 
 			this.peticion.getData().goToText.push(oRow);
@@ -942,7 +868,7 @@ sap.ui.define(["com/grifols/pp/wf/materials/controller/BaseController", "sap/ui/
 
 			this.peticion.setData(this._oODataModel.oData[oContext.sPath.substring(1)]);
 
-					this.peticion.getData().ZzprodAcab = "";
+			this.peticion.getData().ZzprodAcab = "";
 			this.peticion.getData().ZzfabInt = "";
 			this.peticion.getData().ZztipoMat = "";
 			this.peticion.getData().ZzdgLegal = "";
