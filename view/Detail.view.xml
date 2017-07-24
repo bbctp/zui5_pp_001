@@ -150,9 +150,10 @@
 					<sap.ui.core:Title text="{i18n>additionalInformation}" id="__title2"/>
 					<Label text="{i18n>annualConsumption}"/>
 					<Input name="Zzconsumo" id="Zzconsumo_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement" visible="true" value="{ path: 'Zzconsumo', type: 'sap.ui.model.odata.type.Decimal' , constraints:{ precision:13 } }" editable="false"/>
-					<Label text="{i18n>vendor}"/>
-					<Input name="Lifnr" id="Lifnr_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement" visible="true" value="{ path: 'Lifnr', type: 'sap.ui.model.odata.type.String' , constraints:{ maxLength:10 } }" editable="false"/>
 					<Label text="{i18n>vendorCode}"/>
+					<Input name="Lifnr" id="Lifnr_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement" visible="true" value="{ path: 'Lifnr', type: 'sap.ui.model.odata.type.String' , constraints:{ maxLength:10 } }" editable="false"/>
+					<Label text="{i18n>vendor}"/>
+				
 					<Input name="Name1" id="Name1_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement" visible="true" value="{ path: 'Name1', type: 'sap.ui.model.odata.type.String' , constraints:{ maxLength:35 } }" editable="false"/>
 					<Label text="{i18n>vendorInternalRef}"/>
 					<Input name="Idnlf" id="Idnlf_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement" visible="true" value="{ path: 'Idnlf', type: 'sap.ui.model.odata.type.String' , constraints:{ maxLength:35 } }" editable="false"/>

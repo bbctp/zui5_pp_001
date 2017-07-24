@@ -42,7 +42,7 @@
 						</items>
 					</Select>
 					<Label text="{i18n>hierarchyIndicate}" width="100%" id="Other_division_id_lbl"/>
-					<Input width="100%" id="Other_division_id" value="{Peticion>/ZzdivOthers}"/>
+					<Input width="100%" id="Other_division_id" value="{Peticion>/ZzdivOthers}" valueLiveUpdate="true" liveChange="_validateSaveEnablement"/>
 				</f:content>
 			</f:SimpleForm>
 			<f:SimpleForm editable="true" layout="ResponsiveGridLayout" id="__form1" labelSpanM="5" labelSpanL="5">
@@ -160,17 +160,21 @@
 					<Label text="{i18n>annualConsumption}" required="false"/>
 					<Input name="Zzconsumo" id="Zzconsumo_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement" visible="true"
 						value="{ path: 'Peticion>/Zzconsumo', type: 'sap.ui.model.odata.type.Decimal' , constraints:{ precision:13 } }"/>
-					<Label text="{i18n>vendor}" required="false"/>
-					<Input name="Lifnr" id="Lifnr_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement" visible="true"
-						value="{ path: 'Peticion>/Lifnr', type: 'sap.ui.model.odata.type.String' , constraints:{ maxLength:10 } }"/>
+					
 					<Label text="{i18n>vendorCode}" required="false"/>
-					<Input name="Name1" id="Name1_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement" visible="true"
-						value="{ path: 'Peticion>/Name1', type: 'sap.ui.model.odata.type.String' , constraints:{ maxLength:35 } }"/>
+					<Input name="Lifnr" id="Lifnr_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement" visible="true" maxLength="10" type="Number"	
+						value="{ path: 'Peticion>/Lifnr'}"/>
+					
+					<Label text="{i18n>vendor}" required="false"/>
+					<Input name="Name1" id="Name1_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement" visible="true" maxLength="35"
+						value="{ path: 'Peticion>/Name1', type: 'sap.ui.model.odata.type.String' }"/>
+					
 					<Label text="{i18n>vendorInternalRef}" required="false"/>
-					<Input name="Idnlf" id="Idnlf_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement" visible="true"
-						value="{ path: 'Peticion>/Idnlf', type: 'sap.ui.model.odata.type.String' , constraints:{ maxLength:35 } }"/>
+					<Input name="Idnlf" id="Idnlf_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement" visible="true" maxLength="35"
+						value="{ path: 'Peticion>/Idnlf', type: 'sap.ui.model.odata.type.String' }"/>
+					
 					<Label text="{i18n>netPrice}" required="false"/>
-					<Input name="Netpr" id="Netpr_id" liveChange="_validateSaveEnablement"
+					<Input name="Netpr" id="Netpr_id" liveChange="_validateSaveEnablement"  maxLength="13"
 						value="{path:'Peticion>/Netpr', type:'sap.ui.model.odata.type.Decimal', constraints: {scale: 2}, formatOptions: { decimals: 2, maxFractionDigits: 2, decimalSeparator: ',' }}"/>
 					
 					
