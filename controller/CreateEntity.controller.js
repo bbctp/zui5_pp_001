@@ -15,8 +15,7 @@ sap.ui.define(["com/grifols/pp/wf/materials/controller/BaseController", "sap/ui/
 		onInit: function() {
 			// Importamos el objeto de value help
 			jQuery.sap.require("sap.ui.comp.valuehelpdialog.ValueHelpDialog");
-		
-		
+
 			var that = this;
 			this.oComponent = this.getOwnerComponent();
 			this._oODataModel = this.oComponent.getModel();
@@ -60,8 +59,8 @@ sap.ui.define(["com/grifols/pp/wf/materials/controller/BaseController", "sap/ui/
 			// Cargamos los centros
 			this.oWerks = new sap.ui.model.json.JSONModel();
 			this.getPlants();
-			
-				// Cargamos los centros
+
+			// Cargamos los centros
 			this.oBukrs = new sap.ui.model.json.JSONModel();
 			this.oBukrs.setSizeLimit(600);
 			this.getBukrs();
@@ -75,6 +74,10 @@ sap.ui.define(["com/grifols/pp/wf/materials/controller/BaseController", "sap/ui/
 			this.oLineBusiness = new sap.ui.model.json.JSONModel();
 			this.oLineBusiness.setSizeLimit(500);
 			this.getLineBusiness();
+
+			// Cargamos los lifnr
+			this.oLifnr = new sap.ui.model.json.JSONModel();
+			this.oLifnr.setSizeLimit(50);
 
 			// Inicializamos los campos para que este escondidos
 			//	this.onInitFields();
@@ -116,7 +119,7 @@ sap.ui.define(["com/grifols/pp/wf/materials/controller/BaseController", "sap/ui/
 				}
 			});
 		},
-		
+
 		getBukrs: function() {
 			var that = this;
 
@@ -253,7 +256,7 @@ sap.ui.define(["com/grifols/pp/wf/materials/controller/BaseController", "sap/ui/
 							};
 							that.peticion.getData().goToText.push(oRow);
 						}
-							that.getView().getModel("Peticion").refresh(true);
+						that.getView().getModel("Peticion").refresh(true);
 					}
 				});
 				that.getView().getModel("Peticion").refresh(true);
@@ -276,7 +279,7 @@ sap.ui.define(["com/grifols/pp/wf/materials/controller/BaseController", "sap/ui/
 
 		onMessageErrorDialogPress: function() {
 			var that = this;
-			
+
 			var dialog = new Dialog({
 				title: 'Error',
 				type: 'Message',
@@ -760,6 +763,174 @@ sap.ui.define(["com/grifols/pp/wf/materials/controller/BaseController", "sap/ui/
 			oTable1.getBinding("rows").filter(filter);
 
 		},
+
+		onValueHelpRequestLifNr: function(oEvent) {
+
+			var that = this;
+			var sField = oEvent.getSource().getProperty('name');
+
+			this.oValueHelpDialogLifNr = new sap.ui.comp.valuehelpdialog.ValueHelpDialog({
+
+				title: this.getResourceBundle().getText("vendorCode"),
+				supportMultiselect: false,
+				supportRanges: false,
+				supportRangesOnly: false,
+				key: "Lifnr",
+				descriptionKey: "Name1",
+				stretch: sap.ui.Device.system.phone,
+
+				ok: function(oControlEvent) {
+					that.aTokens = oControlEvent.getParameter("tokens");
+					var valor = that.aTokens[0].getProperty("key");
+					var text = that.aTokens[0].getProperty("text");
+					//		that.getView().byId(sField + "_id").setValue(valor);
+					that.peticion.getData().Lifnr = valor;
+					that.peticion.getData().Name1 = text;
+					that.getView().getModel("Peticion").refresh(true);
+					that.oValueHelpDialogLifNr.close();
+				},
+
+				cancel: function(oControlEvent) {
+					that.oValueHelpDialogLifNr.close();
+				},
+
+				afterClose: function() {
+					that.oValueHelpDialogLifNr.destroy();
+					that.oValueHelpDialogLifNr = null;
+				}
+			});
+
+			var oColModel = new sap.ui.model.json.JSONModel();
+			oColModel.setData({
+				cols: [{
+					label: this.getResourceBundle().getText("vendorCode"),
+					template: "Lifnr"
+				}, {
+					label: this.getResourceBundle().getText("vendor"),
+					template: "Name1",
+					demandPopin: true
+				}]
+			});
+			this.oValueHelpDialogLifNr.getTable().setModel(oColModel, "columns");
+
+			if (this.oValueHelpDialogLifNr.getTable().bindRows) {
+				this.oValueHelpDialogLifNr.getTable().bindRows("/");
+			}
+			if (this.oValueHelpDialogLifNr.getTable().bindItems) {
+				var oTable = this.oValueHelpDialogLifNr.getTable();
+
+				oTable.bindAggregation("items", "/", function(sId, oContext) {
+					var aCols = oTable.getModel("columns").getData().cols;
+
+					return new sap.m.ColumnListItem({
+						cells: aCols.map(function(column) {
+							var colname = column.template;
+							return new sap.m.Label({
+								text: "{" + colname + "}"
+							});
+						})
+					});
+				});
+			}
+
+			var oFilterBarLifNr = new sap.ui.comp.filterbar.FilterBar({
+				advancedMode: false,
+				filterBarExpanded: true,
+				showFilterConfiguration: false,
+				showGoOnFB: !sap.ui.Device.system.phone,
+				filterItems: [
+					new sap.ui.comp.filterbar.FilterItem({
+						name: "Linfr",
+						label: this.getResourceBundle().getText("vendorCode"),
+						control: new sap.m.Input({
+							type: "Number",
+							maxLength : 10,
+							submit: function() {
+								that.oValueHelpDialogLifNr.getFilterBar().search();
+							}
+						})
+
+					}),
+					new sap.ui.comp.filterbar.FilterItem({
+						name: "Name1",
+						label: this.getResourceBundle().getText("vendor"),
+						control: new sap.m.Input({
+							submit: function() {
+								that.oValueHelpDialogLifNr.getFilterBar().search();
+							}
+						})
+					})
+				],
+
+				search: function(oEventSearch) {
+
+					var aOdataFilters = oEventSearch.getParameter("selectionSet");
+					var aFilters = [
+						new sap.ui.model.Filter("Lifnr", sap.ui.model.FilterOperator.EQ, aOdataFilters[0].getValue()),
+						new sap.ui.model.Filter("Name1", sap.ui.model.FilterOperator.EQ, aOdataFilters[1].getValue().toString().toUpperCase())
+					];
+
+					that.getOwnerComponent().getModel().read("/VendorSet", {
+						filters: aFilters,
+						async: false,
+						success: function(oData, oResponse) {
+							that.oLifnr.setData(oData.results);
+							that.oValueHelpDialogLifNr.getTable().setModel(that.oLifnr);
+							that.oValueHelpDialogLifNr.getTable().bindRows("/");
+							that.oValueHelpDialogLifNr.update();
+						}
+					});
+
+				}
+			});
+			this.oValueHelpDialogLifNr.setFilterBar(oFilterBarLifNr);
+			this.oValueHelpDialogLifNr.addStyleClass("sapUiSizeCozy");
+			this.oValueHelpDialogLifNr.open();
+
+		},
+
+		changeLifnr: function() {
+			var that = this;
+			var lifnr = this.peticion.getData().Lifnr;
+			if (lifnr === '') {
+				this.peticion.getData().Name1 = '';
+			} else {
+				this.getOwnerComponent().getModel().read("/VendorSet('" + lifnr +"')", {
+				 ///VendorSet('" + lifnr + "')", {
+					async: false,
+					success: function(oData, oResponse) {
+							that.peticion.getData().Lifnr = oData.Lifnr;
+							that.peticion.getData().Name1 = oData.Name1;
+							that.getView().getModel("Peticion").refresh(true);
+					},
+					error: function(oResponse) {
+						that.peticion.getData().Lifnr = '';
+						that.peticion.getData().Name1 = '';
+						that.getView().getModel("Peticion").refresh(true);
+					}
+				});
+			}
+
+			this.getView().getModel("Peticion").refresh(true);
+		},
+
+		// applyUoMFilter: function(question) {
+
+		// 	var aFilters = [
+		// 		new sap.ui.model.Filter("Msehi", sap.ui.model.FilterOperator.Contains, question),
+		// 		new sap.ui.model.Filter("Msehl", sap.ui.model.FilterOperator.Contains, question)
+		// 	];
+
+		// 	var filter = new sap.ui.model.Filter({
+		// 		filters: aFilters,
+		// 		and: false
+		// 	});
+
+		// 	var oTable1 = this.oValueHelpDialog.getTable();
+
+		// 	oTable1.getBinding("rows").filter(filter);
+
+		// },
 
 		onAddRow: function(oEvent) {
 			var oRow = {

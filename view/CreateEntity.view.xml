@@ -58,9 +58,8 @@
 					</Select>
 					-->
 					<Label text="{i18n>alternativeUOM}"/>
-					<MultiInput id="Meinh_id" name="Meinh" value="{Peticion>/Meinh}" showValueHelp="true"
-						valueHelpRequest="onValueHelpRequestUoM" maxTokens="1" maxLength="3"/>
-				
+					<MultiInput id="Meinh_id" name="Meinh" value="{Peticion>/Meinh}" showValueHelp="true" valueHelpRequest="onValueHelpRequestUoM" maxTokens="1"
+						maxLength="3"/>
 					<Label text="{i18n>conversionAUOM}"/>
 					<Input name="Umren" id="Umren_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement" visible="true"
 						value="{ path: 'Peticion>/Umren', type: 'sap.ui.model.odata.type.Decimal' , constraints:{ precision:5, scale:0 } }"/>
@@ -160,25 +159,23 @@
 					<Label text="{i18n>annualConsumption}" required="false"/>
 					<Input name="Zzconsumo" id="Zzconsumo_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement" visible="true"
 						value="{ path: 'Peticion>/Zzconsumo', type: 'sap.ui.model.odata.type.Decimal' , constraints:{ precision:13 } }"/>
-					
 					<Label text="{i18n>vendorCode}" required="false"/>
-					<Input name="Lifnr" id="Lifnr_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement" visible="true" maxLength="10" type="Number"	
+					<MultiInput id="Lifnr_id" name="Lifnr" value="{Peticion>/Lifnr}"  showValueHelp="true" change="changeLifnr"
+						valueHelpRequest="onValueHelpRequestLifNr" maxTokens="1" maxLength="10"/>
+			<!--	
+					<Input name="Lifnr" id="Lifnr_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement" visible="true" maxLength="10" type="Number"
 						value="{ path: 'Peticion>/Lifnr'}"/>
-					
+				-->
+				
 					<Label text="{i18n>vendor}" required="false"/>
 					<Input name="Name1" id="Name1_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement" visible="true" maxLength="35"
-						value="{ path: 'Peticion>/Name1', type: 'sap.ui.model.odata.type.String' }"/>
-					
+						value="{ path: 'Peticion>/Name1' }" editable="false"/>
 					<Label text="{i18n>vendorInternalRef}" required="false"/>
 					<Input name="Idnlf" id="Idnlf_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement" visible="true" maxLength="35"
 						value="{ path: 'Peticion>/Idnlf', type: 'sap.ui.model.odata.type.String' }"/>
-					
 					<Label text="{i18n>netPrice}" required="false"/>
-					<Input name="Netpr" id="Netpr_id" liveChange="_validateSaveEnablement"  maxLength="13"
+					<Input name="Netpr" id="Netpr_id" liveChange="_validateSaveEnablement" maxLength="13"
 						value="{path:'Peticion>/Netpr', type:'sap.ui.model.odata.type.Decimal', constraints: {scale: 2}, formatOptions: { decimals: 2, maxFractionDigits: 2, decimalSeparator: ',' }}"/>
-					
-					
-					
 					<Select items="{Curr>/}" selectedKey="{ path: 'Peticion>/Waers'}" id="Waersbox_id">
 						<items>
 							<core:ListItem text="{Curr>Ktext}" key="{Curr>Waers}" id="Waers_item"/>
@@ -191,12 +188,11 @@
 					<Input name="ZzcompraGrupo" id="ZzcompraGrupo_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement" visible="true"
 						value="{ path: 'Peticion>/ZzcompraGrupo', type: 'sap.ui.model.odata.type.String' , constraints:{ maxLength:1 } }"/>
 					<Label text="{i18n>companyCode}" required="false"/>
-					<Select items="{Bukrs>/}" selectedKey="{Peticion>/ZzempresaCompra}" id="ZzempresaCompra_id" >
+					<Select items="{Bukrs>/}" selectedKey="{Peticion>/ZzempresaCompra}" id="ZzempresaCompra_id">
 						<items>
 							<core:ListItem text="{Bukrs>Werks} {Bukrs>Name1}" key="{Bukrs>Werks}" id="ZzempresaCompra_item"/>
 						</items>
 					</Select>
-					
 					<!--
 					<Input name="ZzempresaCompra" id="ZzempresaCompra_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement" visible="true"
 						value="{ path: 'Peticion>/ZzempresaCompra', type: 'sap.ui.model.odata.type.String' , constraints:{ maxLength:4 } }"/> -->

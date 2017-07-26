@@ -56,6 +56,7 @@ sap.ui.define([
 			
 			// Cargamos los centros
 			this.oBukrs = new sap.ui.model.json.JSONModel();
+			this.oBukrs.setSizeLimit(600);
 			this.getBukrs();
 
 			// Cargamos las monedas
