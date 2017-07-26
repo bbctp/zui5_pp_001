@@ -53,6 +53,10 @@ sap.ui.define([
 			// Cargamos los centros
 			this.oWerks = new sap.ui.model.json.JSONModel();
 			this.getPlants();
+			
+			// Cargamos los centros
+			this.oBukrs = new sap.ui.model.json.JSONModel();
+			this.getBukrs();
 
 			// Cargamos las monedas
 			this.oCurr = new sap.ui.model.json.JSONModel();
@@ -115,6 +119,18 @@ sap.ui.define([
 				success: function(oData, oResponse) {
 					that.oWerks.setData(oData.results);
 					that.getView().setModel(that.oWerks, "Plants");
+				}
+			});
+		},
+		
+			getBukrs: function() {
+			var that = this;
+
+			this.getOwnerComponent().getModel().read("/BukrsSet", {
+				async: false,
+				success: function(oData, oResponse) {
+					that.oBukrs.setData(oData.results);
+					that.getView().setModel(that.oBukrs, "Bukrs");
 				}
 			});
 		},

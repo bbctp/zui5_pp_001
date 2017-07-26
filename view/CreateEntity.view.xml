@@ -191,8 +191,15 @@
 					<Input name="ZzcompraGrupo" id="ZzcompraGrupo_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement" visible="true"
 						value="{ path: 'Peticion>/ZzcompraGrupo', type: 'sap.ui.model.odata.type.String' , constraints:{ maxLength:1 } }"/>
 					<Label text="{i18n>companyCode}" required="false"/>
+					<Select items="{Bukrs>/}" selectedKey="{Peticion>/ZzempresaCompra}" id="ZzempresaCompra_id" >
+						<items>
+							<core:ListItem text="{Bukrs>Werks} {Bukrs>Name1}" key="{Bukrs>Werks}" id="ZzempresaCompra_item"/>
+						</items>
+					</Select>
+					
+					<!--
 					<Input name="ZzempresaCompra" id="ZzempresaCompra_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement" visible="true"
-						value="{ path: 'Peticion>/ZzempresaCompra', type: 'sap.ui.model.odata.type.String' , constraints:{ maxLength:4 } }"/>
+						value="{ path: 'Peticion>/ZzempresaCompra', type: 'sap.ui.model.odata.type.String' , constraints:{ maxLength:4 } }"/> -->
 					<Label text="{i18n>others}" required="false"/>
 					<Input name="Zzotros" id="Zzotros_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement" visible="true"
 						value="{ path: 'Peticion>/Zzotros', type: 'sap.ui.model.odata.type.String' , constraints:{ maxLength:255 } }"/>
